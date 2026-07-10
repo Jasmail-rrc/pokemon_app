@@ -1,0 +1,13 @@
+<h1><%= @type.name.titleize %> Pokémon</h1>
+
+<% @pokemons.each do |pokemon| %>
+  <div>
+    <h3><%= link_to pokemon.name.titleize, pokemon_path(pokemon) %></h3>
+
+    <% if pokemon.image_url.present? %>
+      <%= image_tag pokemon.image_url %>
+    <% end %>
+  </div>
+<% end %>
+
+<p><%= link_to "Back to Pokémon List", pokemons_path %></p>
