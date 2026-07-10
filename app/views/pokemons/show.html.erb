@@ -1,7 +1,9 @@
 <h1><%= @pokemon.name.titleize %></h1>
 
 <% if @pokemon.image_url.present? %>
-  <%= image_tag @pokemon.image_url %>
+  <%= image_tag @pokemon.image_url, alt: @pokemon.name %>
+<% else %>
+  <p><strong>No image available.</strong></p>
 <% end %>
 
 <p>
@@ -9,7 +11,16 @@
   <%= link_to @pokemon.type.name.titleize, type_path(@pokemon.type) %>
 </p>
 
-<p><strong>Height:</strong> <%= @pokemon.height %></p>
-<p><strong>Weight:</strong> <%= @pokemon.weight %></p>
+<p>
+  <strong>Height:</strong>
+  <%= @pokemon.height %>
+</p>
 
-<p><%= link_to "Back to Pokémon List", pokemons_path %></p>
+<p>
+  <strong>Weight:</strong>
+  <%= @pokemon.weight %>
+</p>
+
+<p>
+  <%= link_to "Back to Pokémon List", pokemons_path %>
+</p>
