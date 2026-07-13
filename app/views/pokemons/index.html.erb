@@ -1,17 +1,45 @@
-<%= form_with url: pokemons_path, method: :get, local: true do %>
-  <%= text_field_tag :search, params[:search], placeholder: "Search Pokémon" %>
-  <%= submit_tag "Search" %>
-<% end %>
-<h1>Pokémon List</h1>
+<h1 class="mb-4">Pokémon List</h1>
 
-<% @pokemons.each do |pokemon| %>
-  <div>
-    <h3><%= link_to pokemon.name.titleize, pokemon_path(pokemon) %></h3>
-    <p>Type: <%= pokemon.type.name.titleize %></p>
-    <% if pokemon.image_url.present? %>
-      <%= image_tag pokemon.image_url %>
-    <% end %>
+<%= form_with url: pokemons_path, method: :get, local: true,
+              class: "row g-2 mb-4" do %>
+  <div class="col-md-8">
+    <%= text_field_tag :search,
+                       params[:search],
+                       placeholder: "Search Pokémon",
+                       class: "form-control" %>
+  </div>
+
+  <div class="col-md-4">
+    <%= submit_tag "Search", class: "btn btn-primary" %>
+    <%= link_to "Clear", pokemons_path, class: "btn btn-secondary" %>
   </div>
 <% end %>
 
-<%= paginate @pokemons %>
+<div class="row">
+  <% @pokemons.each do |pokemon| %>
+    <div class="col-md-4 col-lg-3 mb-4">
+      <div class="card h-100">
+        <% if pokemon.image_url.present? %>
+          <%= image_tag pokemon.image_url,
+                        class: "card-img-top",
+                        alt: pokemon.name %>
+        <% end %>
+
+        <div class="card-body">
+          <h2 class="h5 card-title">
+            <%= link_to pokemon.name.titleize,
+                        pokemon_path(pokemon) %>
+          </h2>
+
+          <p class="card-text">
+            Type: <%= pokemon.type.name.titleize %>
+          </p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="mt-4">
+  <%= paginate @pokemons %>
+</div>

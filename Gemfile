@@ -66,3 +66,4 @@ group :test do
 end
 gem "httparty"
 gem "kaminari"
+gem "bootstrap", "~> 5.3"
